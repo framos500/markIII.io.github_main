@@ -1,8 +1,8 @@
-# Cérebro e Pensamento
+<h1> Cérebro e Pensamento </h1> 
 
-## HTML Section
+<h2> HTML Section </h2>
 
-### Pensamento Lógico
+<h3> Pensamento Lógico </h3>
 
 > **1** *2*
 {.is-info}
