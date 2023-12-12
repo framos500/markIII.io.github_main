@@ -3,13 +3,17 @@
 ## HTML Section
 
 ### Pensamento Lógico
-```html
-<div class="code-block">
-    <p class="comment"># Pensamento Lógico</p>
-    <pre>
-        if temperatura &gt; 30:
-            imprimir("Está quente")
-        else:
-            imprimir("Está frio")
-    </pre>
-</div>
+
+> **1** *2*
+{.is-info}
+
+> **1** *2*
+{is-success}
+
+> **1** *2*
+{.is-warning}
+
+> **1** *2*
+{.is-danger}
+
+> **1** *2*
