@@ -1,0 +1,16 @@
+- name: Prefix PHP Code
+  uses: PHP-Prefixer/php-prefixer-build-action@v1.1.0
+  with:
+    personal_access_token: ${{ secrets.vapo }}
+    project_id: ${{ secrets.framos500 }}
+    schema: '{"workflows": "framos500","PPP": "vapo"}'
+
+- name: Debug Schema
+  run: echo "Schema: ${{ env.schema }}"
+  env:
+    schema: '{"workflows": "framos500","PPP": "vapo"}'
+
+
+
+
+
