@@ -1,28 +1,47 @@
-            - name: New Relic Application Deployment Marker
+            - name: PHP-Prefixer
   # You may pin to the exact commit or the version.
-  # uses: newrelic/deployment-marker-action@60142df2a3f5c23d3294486f474299b8f490cd90
-  uses: newrelic/deployment-marker-action@v2.5.0
+  # uses: PHP-Prefixer/php-prefixer-build-action@9008469017553a3b9c0ae85ca2fc3de19f40119f
+  uses: PHP-Prefixer/php-prefixer-build-action@v1.1.0
   with:
-    # Your New Relic User API Key.
-    apiKey: 
-    # Your New Relic entity GUID. This entity GUID should be for the entity you are tracking.
-    guid: 
-    # Custom version information to add to the deployment marker - e.g. the latest tag.
-    version: 
-    # The geographical region for your New Relic account - US or EU. Default: US
-    region: # optional, default is US
-    # Description stored with the deployment. Default: <none>
-    description: # optional
-    # Change log string stored with the deployment. Default: <none>
-    changelog: # optional
-    # Commit for the deployment.
-    commit: # optional
-    # Deep link referencing the deployment.
-    deeplink: # optional
-    # The type of deployment this is conducting.
-    deploymenttype: # optional, default is BASIC
-    # The user creating the deployment. Default: `github.actor`
-    user: # optional, default is ${{ github.actor }}
-    # Group Id used to link deployments together.
-    groupid: # optional
+    # The PHP-Prefixer PAT/Personal Access Token. The token must be configured in the PHP-Prefixer account. Example: `789|1234567890123456789012345678901234567890`.
+
+    personal_access_token: 
+    # The project ID to process the source code. The project must be configured in your account in the PHP-Prefixer account. Example: `5123`.
+
+    project_id: 
+    # The PHP-Prefixer JSON configuration to be applied to the project. By default, the prefixer uses the configuration present in composer.json. If there is no extra configuration or the extra configuration must be replaced, this parameter overrides the composer.json extra configuration to define the PHP-Prefixer schema. Example: '{"project-name": "Prefixed Project","namespaces-prefix": "PPP","global-scope-prefix": "PPP_"}'
+
+    schema: # optional
+    # Personal access token (PAT) used to fetch the repository. The PAT is configured with the local git config, which enables your scripts to run authenticated git commands. The post-job step removes the PAT.
+
+We recommend using a service account with the least permissions necessary. Also when generating a new PAT, select the least scopes necessary.
+
+[Learn more about creating and using encrypted secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)
+
+    token: # default is ${{ github.token }}
+    # Repository name with owner. For example, actions/checkout
+    repository: # optional, default is ${{ github.repository }}
+    # The branch, tag or SHA to checkout. When checking out the repository that triggered a workflow, this defaults to the reference or SHA for that event.  Otherwise, uses the default branch.
+
+    ref: # optional
+    # SSH key used to fetch the repository. The SSH key is configured with the local git config, which enables your scripts to run authenticated git commands. The post-job step removes the SSH key.
+
+We recommend using a service account with the least permissions necessary.
+
+[Learn more about creating and using encrypted secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)
+
+    ssh-key: # optional
+    # Known hosts in addition to the user and global host key database. The public SSH keys for a host may be obtained using the utility `ssh-keyscan`. For example, `ssh-keyscan github.com`. The public key for github.com is always implicitly added.
+
+    ssh-known-hosts: # optional
+    # Whether to perform strict host key checking. When true, adds the options `StrictHostKeyChecking=yes` and `CheckHostIP=no` to the SSH command line. Use the input `ssh-known-hosts` to configure additional hosts.
+
+    ssh-strict: # optional, default is true
+    # Whether to download Git-LFS files
+    lfs: # optional, default is false
+    # Whether to checkout submodules: `true` to checkout submodules or `recursive` to recursively checkout submodules.
+
+When the `ssh-key` input is not provided, SSH URLs beginning with `git@github.com:` are converted to HTTPS.
+
+    submodules: # optional, default is false
           
