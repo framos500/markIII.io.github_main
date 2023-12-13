@@ -1,12 +1,49 @@
-- name: Prefix PHP Code
-  uses: PHP-Prefixer/php-prefixer-build-action@v1.1.0
-  with:
-    personal_access_token: ${{ secrets.vapo }}
-    project_id: ${{ secrets.framos500 }}
-    schema: '{"workflows": "framos500", "PPP": "vapo"}'
+name: Build and Deploy
 
-- name: Set Schema Variable
-  run: echo "::set-env name=SCHEMA::$(echo '{"workflows": "framos500", "PPP": "vapo"}' | base64)"
+on:
+  push:
+    branches:
+      - main
 
-- name: Debug Schema
-  run: echo "Schema: ${{ env.SCHEMA }}"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v2
+      with:
+        ruby-version: 2.7
+
+    - name: Install Dependencies
+      run: |
+        gem install bundler
+        bundle config path vendor/bundle
+        bundle install
+
+    - name: Prefix PHP Code
+      id: prefix
+      uses: PHP-Prefixer/php-prefixer-build-action@v1.1.0
+      with:
+        personal_access_token: ${{ secrets.vapo }}
+        project_id: ${{ secrets.framos500 }}
+        schema: '{"workflows": "framos500", "PPP": "vapo"}'
+
+    - name: Set Schema Variable
+      run: echo "SCHEMA=${{ steps.prefix.outputs.schema }}" >> $GITHUB_ENV
+
+    - name: Debug Schema
+      run: echo "Schema:${{ env.SCHEMA }}"
+
+
+    - name: Build with Jekyll
+      run: bundle exec jekyll build
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: 'jekyll-site'
+        path: '_site'
