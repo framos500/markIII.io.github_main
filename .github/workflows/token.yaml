@@ -3,14 +3,10 @@
   with:
     personal_access_token: ${{ secrets.vapo }}
     project_id: ${{ secrets.framos500 }}
-    schema: '{"workflows": "framos500","PPP": "vapo"}'
+    schema: '{"workflows": "framos500", "PPP": "vapo"}'
+
+- name: Set Schema Variable
+  run: echo "::set-env name=SCHEMA::$(echo '{"workflows": "framos500", "PPP": "vapo"}' | base64)"
 
 - name: Debug Schema
-  run: echo "Schema: ${{ env.schema }}"
-  env:
-    schema: '{"workflows": "framos500","PPP": "vapo"}'
-
-
-
-
-
+  run: echo "Schema: ${{ env.SCHEMA }}"
