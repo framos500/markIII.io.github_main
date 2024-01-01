@@ -18,9 +18,9 @@ jobs:
       with:
         ruby-version: 2.7
 
-
     - name: Install Dependencies
       run: |
+        # Instalação do Bundler e dependências
         gem install bundler
         bundle config path vendor/bundle
         bundle install
@@ -44,6 +44,7 @@ jobs:
 
     - name: Debug Directories
       run: |
+        # Exibe informações sobre diretórios
         pwd
         ls -la
         ls -la ./docs
@@ -53,5 +54,6 @@ jobs:
       with:
         name: 'jekyll-site'
         path: '_site'
+
     - name: Create Docs Directory
       run: mkdir -p /github/workspace/docs
