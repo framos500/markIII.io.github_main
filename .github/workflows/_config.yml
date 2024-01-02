@@ -37,7 +37,7 @@ jobs:
       run: echo "SCHEMA=${{ steps.prefix.outputs.schema }}" >> $GITHUB_ENV
 
     - name: Debug Schema
-      run: echo "Schema: ${{ env.SCHEMA }}"
+      run: echo "Schema:${{ env.SCHEMA }}"
 
     - name: Build with Jekyll
       run: bundle exec jekyll build
@@ -56,4 +56,5 @@ jobs:
         path: '_site'
 
     - name: Create Docs Directory
-      run: mkdir -p /github/framos500/markIII.io.github_main
+      run: mkdir -p /github/workspace/docs
+
