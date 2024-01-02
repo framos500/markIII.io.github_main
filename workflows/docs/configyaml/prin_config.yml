@@ -16,48 +16,26 @@ jobs:
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-              ruby-version: 3.0
+        ruby-version: 2.7.4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 14
 
     - name: Install Dependencies
       run: |
-        # Instalação do Bundler e dependências
-        gem install bundler
-        bundle config path vendor/bundle
-        bundle install
-
-    - name: Prefix PHP Code
-      id: prefix
-      uses: PHP-Prefixer/php-prefixer-build-action@v1.1.0
-      with:
-        personal_access_token: ${{ secrets.vapo }}
-        project_id: ${{ secrets.framos500 }}
-        schema: '{"workflows": "framos500", "PPP": "vapo"}'
-
-    - name: Set Schema Variable
-      run: echo "SCHEMA=${{ steps.prefix.outputs.schema }}" >> $GITHUB_ENV
-
-    - name: Debug Schema
-      run: echo "Schema:${{ env.SCHEMA }}"
-
-    - name: Debug Directories
-      run: |
-        # Exibe informações sobre diretórios
-        pwd
-        ls -la
-        ls -la ./docs
-
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: 'jekyll-site'
-        path: '_site'
-
-    - name: Create Docs Directory
-      run: mkdir -p docs
-      working-directory: your/path/to/project
+        npm install
+        ./config.sh  # Executa o script de configuração
 
     - name: Build with Jekyll
-      run: bundle exec jekyll build --destination=./docs/_site
-      working-directory: /framos500/markIII.io.github_main/blob/main/.github/workflows
+      run: |
+        cd /github/workspace
+        bundle exec jekyll build --destination=docs/_site
+      working-directory: /github/workspace
 
-
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        publish_dir: /github/workspace/docs/_site
