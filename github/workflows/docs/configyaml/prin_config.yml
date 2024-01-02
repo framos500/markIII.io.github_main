@@ -13,15 +13,15 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Create Docs Directory
-      run: mkdir -p docs
-      working-directory: markIII.io.github_main/github/workflows/docs
-
     - name: Debug Directories
       run: |
         pwd
         ls -la
         ls -la ./docs
+        ls -la ./docs/config_html_css
+        ls -la ./docs/configjson
+        ls -la ./docs/configsh
+        ls -la ./docs/configyaml
 
     - name: Setup Ruby
       uses: actions/setup-ruby@v2
@@ -32,10 +32,11 @@ jobs:
       run: |
         gem install bundler
         bundle install
+      working-directory: docs
 
     - name: Build Jekyll
       run: bundle exec jekyll build
-      working-directory: markIII.io.github_main/github/workflows/docs
+      working-directory: docs
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
