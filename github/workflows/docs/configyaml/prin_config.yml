@@ -25,11 +25,12 @@ jobs:
     - name: Set Schema Variable
       run: echo "::set-env name=SCHEMA::$(cat markIII.io.github_main/github/workflows/docs/schema.json | base64)"
 
-    - name: Build Jekyll Site
-      run: |
-        chmod +x markIII.io.github_main/build.sh
-        cd markIII.io.github_main/markIII.io.github_main  # Entre no diretório onde estão os arquivos do Jekyll
-        bundle exec jekyll build
+   - name: Build Jekyll Site
+  run: |
+    chmod +x markIII.io.github_main/build.sh
+    cd markIII.io.github_main/markIII.io.github_main  # Entre no diretório onde estão os arquivos do Jekyll
+    bundle install  # Se ainda não tiver sido feito
+    bundle exec jekyll build
 
     - name: Docker Build
       run: docker build -t my-jekyll-image -f markIII.io.github_main/dockerfile .
