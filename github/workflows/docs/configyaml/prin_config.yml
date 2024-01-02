@@ -28,7 +28,8 @@ jobs:
     - name: Build Jekyll Site
       run: |
         chmod +x markIII.io.github_main/build.sh
-        ./markIII.io.github_main/build.sh
+        cd markIII.io.github_main/markIII.io.github_main  # Entre no diretório onde estão os arquivos do Jekyll
+        bundle exec jekyll build
 
     - name: Docker Build
       run: docker build -t my-jekyll-image -f markIII.io.github_main/dockerfile .
@@ -37,4 +38,4 @@ jobs:
       run: docker run -it --rm my-jekyll-image
 
     - name: Copy HTML and CSS
-      run: cp markIII.io.github_main/github/workflows/docs/config_html_css/HTMLteste_1.html markIII.io.github_main/HTMLteste_1.html
+      run: cp markIII.io.github_main/github/workflows/docs/config_html_css/HTMLteste_1.html markIII.io.github_main/markIII.io.github_main/_site/HTMLteste_1.html
