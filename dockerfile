@@ -1,14 +1,11 @@
-# Use a imagem oficial do Jekyll como base
+# Use a imagem base com Ruby e Jekyll pré-instalados
 FROM jekyll/builder:latest
 
-# Configure o diretório de trabalho
+# Defina o diretório de trabalho
 WORKDIR /srv/jekyll
 
-# Copie o conteúdo do diretório do projeto para o contêiner
+# Copie o conteúdo do diretório atual (onde o Dockerfile está localizado) para o diretório de trabalho no contêiner
 COPY . .
 
-# Instale as dependências
-RUN bundle install
-
-# Comando padrão para construir o site Jekyll
-CMD ["jekyll", "build"]
+# Execute o script bash ao iniciar o contêiner
+CMD ["./build.sh"]
