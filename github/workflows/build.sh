@@ -6,3 +6,5 @@
 bundle exec jekyll build
 
 # Se necessário, adicione comandos adicionais aqui após a construção do Jekyll
+
+chmod +x build.sh
