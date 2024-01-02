@@ -1,7 +1,3 @@
-chmod +x Gemfile
-
-touch Gemfile
-
 source "https://rubygems.org"
 
 gem "jekyll", "~> 3.9"
