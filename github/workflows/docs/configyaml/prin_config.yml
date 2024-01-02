@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Jekyll Build and Deploy
 
 on:
   push:
@@ -10,32 +10,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Set up Ruby
-      uses: actions/setup-ruby@v2
-      with:
-        ruby-version: 2.7
-
-    - name: Create docs directory
+    - name: Load Environment Variables
       run: |
-        mkdir -p docs
-        cp -r * docs/
+        if [ -f "markIII.io.github_main/github/workflows/docs/variaveis.env" ]; then
+          export $(grep -v '^#' markIII.io.github_main/github/workflows/docs/variaveis.env | xargs)
+        fi
 
-    - name: Install Bundler
-      run: gem install bundler -v 2.7
+    - name: Set Schema
+      run: echo "workflows=framos500 PPP=vapo" > markIII.io.github_main/github/workflows/docs/schema.json
 
-    - name: Install dependencies
-      working-directory: docs
-      run: bundle install
+    - name: Set Schema Variable
+      run: echo "::set-env name=SCHEMA::$(cat markIII.io.github_main/github/workflows/docs/schema.json | base64)"
 
-    - name: Build Jekyll site
-      working-directory: docs
-      run: bundle exec jekyll build
+    - name: Debug Schema
+      run: echo "Schema: ${{ env.SCHEMA }}"
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: docs/_site
+    - name: Build Jekyll Site
+      run: |
+        chmod +x markIII.io.github_main/github/workflows/docs/build.sh
+        ./markIII.io.github_main/github/workflows/docs/build.sh
