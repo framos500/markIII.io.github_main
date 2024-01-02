@@ -1,4 +1,4 @@
-chmod +x markiiiframos.sh
+chmod +x Gemfile.sh
 
 touch Gemfile
 
