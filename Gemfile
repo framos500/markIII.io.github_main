@@ -1,4 +1,4 @@
-chmod +x Gemfile.sh
+chmod +x Gemfile
 
 touch Gemfile
 
