@@ -58,6 +58,6 @@ jobs:
 
     - name: Build with Jekyll
       run: bundle exec jekyll build --destination=./docs/_site
-      working-directory: your/path/to/project
+      working-directory: /framos500/markIII.io.github_main/blob/main/.github/workflows
 
 
