@@ -1,15 +1,22 @@
 #!/bin/bash
 
-# Criar o diretório
-mkdir -p /github/workspace/docs
+# Criar a estrutura de diretórios
+mkdir -p /github/workspace/docs/config_html_css
+mkdir -p /github/workspace/docs/configjson
+mkdir -p /github/workspace/docs/configsh
+mkdir -p /github/workspace/docs/configyaml
 
 # Exibe informações sobre diretórios
 pwd
 ls -la
 ls -la /github/workspace
+ls -la /github/workspace/docs
 
-# Instalar Bundler na versão 2.4.22
-gem install bundler -v 2.4.22
+# Instalar Bundler na versão 2.7
+gem install bundler -v 2.7
+
+# Entrar no diretório docs
+cd /github/workspace/docs
 
 # Instalar as dependências do Jekyll
 bundle install
