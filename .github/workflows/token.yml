@@ -37,7 +37,7 @@ jobs:
       run: echo "SCHEMA=${{ steps.prefix.outputs.schema }}" >> $GITHUB_ENV
 
     - name: Debug Schema
-      run: echo "Schema:${{ env.SCHEMA }}"
+      run: echo "Schema: ${{ env.SCHEMA }}"
 
     - name: Build with Jekyll
       run: bundle exec jekyll build
