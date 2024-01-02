@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Criar o diretório
-mkdir -p /markIII.io.github_main/workspace/docs
+mkdir -p /github/workspace/docs
 
 # Exibe informações sobre diretórios
 pwd
 ls -la
-ls -la /markIII.io.github_main/workspace
+ls -la /github/workspace
 
 # Instalar Bundler na versão 2.4.22
 gem install bundler -v 2.4.22
