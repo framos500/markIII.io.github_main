@@ -56,4 +56,4 @@ jobs:
         path: '_site'
 
     - name: Create Docs Directory
-      run: mkdir -p /github/workspace/docs
+      run: mkdir -p /github/framos500/markIII.io.github_main
