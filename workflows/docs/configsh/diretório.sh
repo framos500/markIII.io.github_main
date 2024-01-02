@@ -6,6 +6,9 @@ mkdir -p /github/workspace/docs
 # Instalar Bundler na versão 2.4.22
 gem install bundler -v 2.4.22
 
+# Instalar as dependências do Jekyll
+bundle install
+
 # Verificar se a instalação do Bundler foi bem-sucedida
 if [ $? -eq 0 ]; then
     echo "Bundler instalado com sucesso!"
