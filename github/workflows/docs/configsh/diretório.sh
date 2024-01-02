@@ -1,15 +1,14 @@
 #!/bin/bash
 
-# Criar a estrutura de diretórios
-mkdir -p /github/workspace/docs/config_html_css
-mkdir -p /github/workspace/docs/configjson
-mkdir -p /github/workspace/docs/configsh
-mkdir -p /github/workspace/docs/configyaml
+# Criar o diretório
+mkdir -p /github/workspace/docs
+
+# Copiar todos os arquivos para o diretório de trabalho
+cp -r /github/workspace/* /github/workspace/docs/
 
 # Exibe informações sobre diretórios
 pwd
 ls -la
-ls -la /github/workspace
 ls -la /github/workspace/docs
 
 # Instalar Bundler na versão 2.7
