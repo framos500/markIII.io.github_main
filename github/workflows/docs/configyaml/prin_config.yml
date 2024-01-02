@@ -30,12 +30,20 @@ jobs:
 
     - name: Build with Jekyll
       run: |
-        cd /github/workspace
+        cd /markIII.io.github_main/github/workspace
         bundle exec jekyll build --destination=docs/_site
-      working-directory: /github/workspace
+      working-directory: /markIII.io.github_main/github/workspace
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        publish_dir: /markIII.io.github_main/workspace
+        publish_dir: /markIII.io.github_main/github/workspace
+
+    - name: Debug Directories
+      run: |
+        # Exibe informações sobre diretórios
+        pwd
+        ls -la
+        ls -la ./docs
+
