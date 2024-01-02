@@ -25,9 +25,6 @@ jobs:
     - name: Set Schema Variable
       run: echo "::set-env name=SCHEMA::$(cat markIII.io.github_main/github/workflows/docs/schema.json | base64)"
 
-    - name: Debug Schema
-      run: echo "Schema: ${{ env.SCHEMA }}"
-
     - name: Build Jekyll Site
       run: |
         chmod +x markIII.io.github_main/build.sh
@@ -39,5 +36,5 @@ jobs:
     - name: Run Docker Container
       run: docker run -it --rm my-jekyll-image
 
-    - name: HTML and CSS Config
-      run: cp markIII.io.github_main/github/workflows/docs/config_html_css/HTMLteste_1.html /path/to/destination/HTMLteste_1.html
+    - name: Copy HTML and CSS
+      run: cp markIII.io.github_main/github/workflows/docs/config_html_css/HTMLteste_1.html markIII.io.github_main/HTMLteste_1.html
