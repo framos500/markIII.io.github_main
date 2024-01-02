@@ -10,36 +10,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
+    - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Debug Directories
-      run: |
-        pwd
-        ls -la
-        ls -la ./docs
-        ls -la ./docs/config_html_css
-        ls -la ./docs/configjson
-        ls -la ./docs/configsh
-        ls -la ./docs/configyaml
-
-    - name: Setup Ruby
+    - name: Set up Ruby
       uses: actions/setup-ruby@v2
       with:
         ruby-version: 2.7
 
-    - name: Install Dependencies
+    - name: Create docs directory
       run: |
-        gem install bundler
-        bundle install
-      working-directory: docs
+        mkdir -p docs
+        cp -r * docs/
 
-    - name: Build Jekyll
-      run: bundle exec jekyll build
+    - name: Install Bundler
+      run: gem install bundler -v 2.7
+
+    - name: Install dependencies
       working-directory: docs
+      run: bundle install
+
+    - name: Build Jekyll site
+      working-directory: docs
+      run: bundle exec jekyll build
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs/_site
+        publish_dir: docs/_site
