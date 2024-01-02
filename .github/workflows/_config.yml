@@ -40,7 +40,7 @@ jobs:
       run: echo "Schema:${{ env.SCHEMA }}"
 
     - name: Build with Jekyll
-      run: bundle exec jekyll build
+      run: bundle exec jekyll build --destination=./docs/_site
 
     - name: Debug Directories
       run: |
@@ -57,4 +57,5 @@ jobs:
 
     - name: Create Docs Directory
       run: mkdir -p /github/workspace/docs
+
 
