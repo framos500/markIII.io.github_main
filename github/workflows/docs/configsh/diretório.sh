@@ -3,19 +3,17 @@
 # Criar o diretório
 mkdir -p /github/workspace/docs
 
-# Copiar todos os arquivos para o diretório de trabalho
+# Mover arquivos para o diretório
 cp -r /github/workspace/* /github/workspace/docs/
 
 # Exibe informações sobre diretórios
+cd /github/workspace/docs
 pwd
 ls -la
-ls -la /github/workspace/docs
+ls -la /github/workspace
 
-# Instalar Bundler na versão 2.7
-gem install bundler -v 2.7
-
-# Entrar no diretório docs
-cd /github/workspace/docs
+# Instalar Bundler na versão 2.4.22
+gem install bundler -v 2.4.22
 
 # Instalar as dependências do Jekyll
 bundle install
